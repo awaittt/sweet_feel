@@ -9,7 +9,7 @@ let param=qs.stringify({
 })
 //必须得到token才能操作云开发数据库
 let url='https://api.weixin.qq.com/cgi-bin/token?'+param
-
+let env='sweetfood-7gcsdd06b88dcc31'
 class getToken{
         constructor(){
 
@@ -18,7 +18,6 @@ class getToken{
         async gettoken(){
             try{
                 let token=await axios.get(url)
-                console.log(token)
                 if(token.status===200){
                     return token.data.access_token
                 }else{
@@ -28,6 +27,21 @@ class getToken{
             }catch(e){
                 console.log(e)
                 throw new result(e,500)
+            }
+        }
+        //获取云数据库
+
+        async getData(baseUrl,query){
+            try{
+                let  url=baseUrl+await this.gettoken()
+                let data=await axios.post(url,{
+                    env,
+                    query
+                })
+                console.log(data)
+            }catch(e){
+                throw new result(e,500)
+
             }
         }
 }

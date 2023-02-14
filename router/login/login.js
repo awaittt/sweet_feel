@@ -12,9 +12,16 @@ const result=require('../../config/main')
 router.get('/register',async ctx=>{
     console.log("8006")
     //操作数据库
-    new getToken().gettoken()
+    // new getToken().gettoken()
     //总的响应
-    new result(ctx).answer()
-})
+    // new result(ctx).answer()
+
+    let url='https://api.weixin.qq.com/tcb/databaseadd?access_token='
+    let query=`db.collection(\"test\").add({data:{name:'王五'}})`
+        let data=  new getToken().getData(url,query)
+        if(data){
+            ctx.body='云数据库启用'
+        }
+    })
 
 module.exports=router.routes()
