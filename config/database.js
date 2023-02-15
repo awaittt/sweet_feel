@@ -25,7 +25,6 @@ class getToken{
                     throw '获取token错误'
                 }
             }catch(e){
-                console.log(e)
                 throw new result(e,500)
             }
         }
@@ -38,7 +37,12 @@ class getToken{
                     env,
                     query
                 })
-                console.log(data)
+                if(data.data.errcode===0){
+                    return data.data
+
+                }else{
+                    throw '请求出错啦'
+                }
             }catch(e){
                 throw new result(e,500)
 
