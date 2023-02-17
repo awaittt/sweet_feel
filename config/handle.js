@@ -1,3 +1,5 @@
+//全局错误处理
+
 class DataResult extends Error{
     constructor(msg,code){
         super()
